@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js sample-json</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <h2>Jsonを読み込む例</h2>
+    <h3>JavaScript</h3>
+    <input type="file" id="loader">
+
+    <h3>Vue</h3>
+    <div id="json">
+        <input type="file" @change="onFileChange">
+        <p>読み込みデータ={{loadData}}</p>
+    </div>
+<script>
+    // JSで読み込む
+    var obj1 = document.getElementById("loader");
+    obj1.addEventListener("change", loadFile, false);
+    function loadFile(e) {
+        file = e.target.files[0]
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                console.log(">>>"+e.target.result);
+                json = JSON.parse(e.target.result);
+                console.log(">>>"+ json[0].title);
+                console.log(">>>"+ json[0].body);
+            }
+            reader.readAsText(file);
+        }
+    }
+
+    // Vueで読み込む
+    new Vue({
+        el:'#json',
+        data: {
+            loadData:'',
+        },
+        methods: {
+            onFileChange: function(e) {
+                file = e.target.files[0]
+                if (file) {
+                    var reader = new FileReader()
+                    var vm = this;
+                    reader.onload = function(e) {
+                        json = JSON.parse(e.target.result);
+                        vm.loadData = json;
+                    }
+                    reader.readAsText(file)
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

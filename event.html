@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js sample-Event</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <h2>ユーザーのアクションと連動</h2>
+    <div id="count">
+        <p>{{count}}回</p>
+        <button @click="countUp">カウント</button>
+    </div>
+    <hr>
+
+    <div id="iine">
+        <button value="いいね" :disabled="isClick" @click="onClick">いいね</button>
+    </div>
+    <hr>
+
+    <div id="countv2">
+        <p>{{count}}</p>
+        <button @click="countUp(3)">3増やす</button>
+        <button @click="countUp(10)">10増やす</button>
+        <button @click="countUp(100)">100増やす</button>
+    </div>
+    <hr>
+
+    <div id="keyup">
+        <input @keyup.enter.shift="showAlert(myText)" v-model="myText">
+        <p>{{myText}}</p>
+    </div>
+    <hr>
+
+<script>
+new Vue({
+    el:"#count",
+    data: {
+        count:0
+    },
+    methods: {
+        countUp: function() {
+            this.count++;
+        }
+    }
+})
+
+function iine() {
+    alert("いいね");
+}
+new Vue({
+    el:"#iine",
+    data: {
+        isClick:false
+    },
+    methods: {
+        onClick: function() {
+            this.isClick = true;
+            iine();
+        }
+    }
+})
+
+new Vue({
+    el:"#countv2",
+    data: {
+        count:0
+    },
+    methods: {
+        countUp: function(value) {
+            this.count += value;
+        }
+    }
+})
+
+new Vue({
+    el:"#keyup",
+    data: {
+        myText:''
+    },
+    methods: {
+        showAlert: function(alertTxt) {
+            alert(alertTxt + "が入力されます。");
+        }
+    }
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js sample-vmodel</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <h2>フォームから操作</h2>
+    <div id="name">
+        <input v-model="myName" placeholder="お名前">
+        <p>私は{{myName}}です。</p>
+    </div>
+
+    <hr>
+
+    <div id="text">
+        <textarea v-model="myText"></textarea>
+        <p>文章は「{{myText}}」</p>
+        <p>文字数は、{{myText.length}}文字です。</p>
+    </div>
+
+    <hr>
+
+    <div id="check">
+        <label>
+            <input type="checkbox" v-model="myCheck">
+            チェックボックスは、{{myCheck}}
+        </label>
+        <br>
+
+        <label>
+            <input type="checkbox" value="red" v-model="myChecks">
+            あか
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" value="green" v-model="myChecks">
+            みどり
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" value="blue" v-model="myChecks">
+            あお
+        </label>
+        <br>
+        選択したのは、{{myChecks}}
+    </div>
+
+    <hr>
+
+    <div id="agree">
+        <label>
+            <input type="checkbox" v-model="myAgree">同意する
+        </label>
+
+        <button type="submit" :disabled="!myAgree">送信</button>
+    </div>
+
+    <hr>
+
+    <div id="radio">
+        <label>
+            <input type="radio" value="red" v-model="picked">
+            あか
+        </label>
+        <br>
+        <label>
+            <input type="radio" value="green" v-model="picked">
+            みどり
+        </label>
+        <br>
+        <label>
+            <input type="radio" value="blue" v-model="picked">
+            あお
+        </label>
+        <br>
+        {{picked}}を選択
+    </div>
+
+    <hr>
+
+    <div id="radioImg">
+        <label>
+            <input type="radio" :value="imgData01" v-model="fileName">
+            img01
+        </label>
+        <br>
+        <label>
+            <input type="radio" :value="imgData02" v-model="fileName">
+            img02
+        </label>
+        <br>
+        <figure>
+            <img :src="fileName">
+            <figcaption>{{fileName}}を選択</figcaption>
+        </figure>
+    </div>
+
+    <hr>
+
+    <div id="select">
+        <select v-model="myColor">
+            <option disabled value="">色を選んでください</option>
+            <option>red</option>
+            <option>green</option>
+            <option>blue</option>
+            <option>orange</option>
+            <option>brown</option>
+        </select>
+        <p v-bind:style="{color:myColor}">選んだのは、{{myColor}}です。</p>
+    </div>
+
+    <hr>
+
+    <div id="select-multi">
+        <select v-model="myColor" multiple style="width: 150px;">
+            <option>red</option>
+            <option>green</option>
+            <option>blue</option>
+            <option>orange</option>
+            <option>brown</option>
+        </select>
+        <p>選んだのは、{{myColor}}です。</p>
+    </div>
+
+    <hr>
+
+    <div id="lazy">
+        <input v-model.lazy="myText">
+        <p>入力後に表示：「{{myText}}」</p>
+    </div>
+
+    <hr>
+
+    <div id="number">
+        <input v-model.number="myNumber" type="number">
+        <p>100を足して表示：「{{100 + myNumber}}」</p>
+    </div>
+
+    <hr>
+
+    <div id="trim">
+        <input v-model.trim="myText" type="text">
+        <p>前後の空白を削除：「{{myText}}」</p>
+    </div>
+
+    <hr>
+<script>
+new Vue({
+    el:"#name",
+    data: {
+        myName:''
+    }
+})
+
+new Vue({
+    el:"#text",
+    data: {
+        myText:'今日は、いい天気です。'
+    }
+})
+
+new Vue({
+    el:"#check",
+    data: {
+        myCheck:false,
+        myChecks:[]
+    }
+})
+
+new Vue({
+    el:"#agree",
+    data: {
+        myAgree:false
+    }
+})
+
+new Vue({
+    el:"#radio",
+    data: {
+        picked:'red'
+    }
+})
+
+new Vue({
+    el:"#radioImg",
+    data: {
+        imgData01:'./img/face1.png',
+        imgData02:'./img/face2.png',
+        fileName:''
+    }
+})
+
+new Vue({
+    el:"#select",
+    data: {
+        myColor:''
+    }
+})
+
+new Vue({
+    el:"#select-multi",
+    data: {
+        myColor:[]
+    }
+})
+
+new Vue({
+    el:"#lazy",
+    data: {
+        myText:''
+    }
+})
+
+new Vue({
+    el:"#number",
+    data: {
+        myNumber:0
+    }
+})
+
+new Vue({
+    el:"#trim",
+    data: {
+        myText:''
+    }
+})
+</script>
+</body>
+</html>

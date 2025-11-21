@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js sample-vbind</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <h2>属性を操作</h2>
+    <div id="img">
+        <img src="./img/face1.png">直接指定</img></p>
+        <img :src="fileName">v-bindで指定</img>
+    </div>
+
+    <hr>
+
+    <div id="link">
+        <a href="https://www.ymori.com">リンク直接指定</a>
+        <a :href="myLink" :target="myTarget">リンク間接指定</a>
+    </div>
+
+    <hr>
+
+    <div id="text">
+        <p :align="myAlign1">center</p>
+        <p :align="myAlign2">right</p>
+        <p :align="myAlign3">left</p>
+    </div>
+
+    <hr>
+
+    <div id="style">
+        <p :style="{height:myValue}">center01</p>
+        <p :style="{fontSize:mySize}">center02</p>
+        <p :style="{backgroundColor:myColor}">center03</p>
+    </div>
+
+    <hr>
+
+    <div id="class">
+        <p :class="myClass">center01</p>
+        <p :class="[myClass, darkClass]">center02</p>
+        <p :class="{'strike-through':isOn}">center03</p>
+    </div>
+<script>
+new Vue({
+    el:"#img",
+    data: {
+        fileName:'./img/face1.png'
+    }
+})
+
+new Vue({
+    el:"#link",
+    data: {
+        myLink:'https://www.ymori.com',
+        myTarget:'_blunk'
+    }
+})
+
+new Vue({
+    el:"#text",
+    data: {
+        myAlign1:'center',
+        myAlign2:'right',
+        myAlign3:'left'
+    }
+})
+
+new Vue({
+    el:"#style",
+    data: {
+        myValue:'200%',
+        mySize:'300%',
+        myColor:'red'
+    }
+})
+
+new Vue({
+    el:"#class",
+    data: {
+        myClass:'strike-through',
+        darkClass:'dark',
+        isOn:false
+    }
+})
+</script>
+</body>
+</html>

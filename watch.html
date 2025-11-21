@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js sample-watch</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <h2>データの監視</h2>
+    <div id="forbidden">
+        <p>禁止文字は「{{forbiddenText}}」</p>
+        <textarea v-model="inputText"></textarea>
+    </div>
+    <hr>
+
+    <h3>残り秒数が0になったら、アラートを出す例</h3>
+    <div id="alertTimer">
+        <p>あと、{{restSec}}秒</p>
+        <button @click="startTimer()">START</button>
+    </div>
+    <hr>
+
+<script>
+new Vue({
+    el: '#forbidden',
+    data: {
+        forbiddenText:'だめ',
+        inputText:'今日は、いい天気です。'
+    },
+    watch: {
+        // 入力された文字列を監視する
+        inputText: function() {
+            var pos = this.inputText.indexOf(this.forbiddenText);
+            if(pos >= 0) {
+                alert(this.forbiddenText + "は入力できません。");
+                // 入力文字列から禁止文字を削除する
+                this.inputText = this.inputText.substr(0,pos);
+            }
+        }
+    }
+})
+new Vue ({
+    el: '#alertTimer',
+    data: {
+        restSec: 5,
+        timerObj:null,
+    },
+    methods: {
+        startTimer: function() {
+            // 残り5秒
+            this.restSec = 5;
+            // タイマースタート。1秒（1000ミリ秒）ごとに、1秒減らす
+            this.timerObj = setInterval(() => {this.restSec--}, 1000)
+        }
+    },
+    watch: {
+        // 残り秒数を監視する
+        restSec: function() {
+            // 0秒以下になったらアラート＆タイマー停止
+            if(this.restSec <= 0) {
+                alert("制限時間です。");
+                clearInterval(this.timerObj);
+            }
+        }
+    }
+})
+</script>
+</body>
+</html>
